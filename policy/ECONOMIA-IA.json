@@ -1,0 +1,55 @@
+{
+  "schema": "tcsa.ia-efficiency.policy.v1",
+  "version": "1.0.0",
+  "priority": "P0",
+  "status": "SPECIFICATION_NOT_AUTONOMOUS_ROUTER",
+  "goals": [
+    "minimize_remote_expert_requests_without_losing_quality",
+    "avoid_repetition_and_context_bloat",
+    "prefer_local_and_deterministic_verified_execution"
+  ],
+  "tiers": [
+    {
+      "id": "L0",
+      "name": "DETERMINISTIC",
+      "cloudAllowed": false
+    },
+    {
+      "id": "L1",
+      "name": "LOCAL_MODEL",
+      "cloudAllowed": false
+    },
+    {
+      "id": "L2",
+      "name": "REMOTE_EXPERT",
+      "requiresJustification": true,
+      "requiresApprovedDataScope": true
+    },
+    {
+      "id": "L3",
+      "name": "SECOND_EXPERT_REVIEW",
+      "requiresCriticalReason": true,
+      "requiresApprovedDataScope": true
+    }
+  ],
+  "principles": {
+    "cacheRequiresExactCompatibleInputs": true,
+    "liveStateNeverFromCache": true,
+    "staleCheckpointRequiresReconciliation": true,
+    "remoteDisclosureDefault": "DENY_UNTIL_AUTHORIZED",
+    "batchRoutineWork": true,
+    "maxRetriesWithoutNewEvidence": 2,
+    "budgetLimits": "PER_GOAL_CONFIGURED_NO_INVENTED_DEFAULT",
+    "reportUnknownCosts": true
+  },
+  "metrics": [
+    "remoteCalls",
+    "promptTokensMeasured",
+    "completionTokensMeasured",
+    "actualCostKnownOrUnknown",
+    "localExecutionTimeMeasured",
+    "independentTestsPass",
+    "cacheHits"
+  ],
+  "acceptance": "E2E_PENDING"
+}
