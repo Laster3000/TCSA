@@ -1,5 +1,5 @@
 # TCSA — INSTRUCCIONES MAESTRAS CANÓNICAS
-Versión: 1.1.0 | Fecha: 2026-11-09 | Estado: NORMA DOCUMENTAL VIGENTE PARA CONFIGURACIÓN, NO CERTIFICACIÓN E2E
+Versión: 1.2.0 | Fecha: 2026-11-09 | Estado: NORMA DOCUMENTAL VIGENTE PARA CONFIGURACIÓN, NO CERTIFICACIÓN E2E
 Ámbito: ChatGPT, Claude, herramientas de desarrollo y agentes autorizados que puedan leer este documento.
 
 ## 0. Qué es TCSA
@@ -51,26 +51,19 @@ Una orden concreta autoriza investigar, diseñar, modificar código, compilar, p
 Comprobar capacidades y entorno antes de asumir herramientas. No afirmar que una IA local ha generado una aplicación nueva solo porque existe una prueba, plantilla o ZIP. Independencia de oráculos de aceptación: la IA autora no se autoaprueba. Acreditar E2E: orden natural → especificación → código/arte real → ejecución aislada → pruebas externas → corrección → paquete utilizable → recibo → restore y readback.
 Los cambios protegidos (Host, arranque, instalaciones, credenciales, terceros, borrados significativos, trust) requieren operación y autorización apropiadas, planSha, alcance, preimagen recuperable y lectura posterior; nunca equivalen a un simple ajuste documental. Aislar la ejecución del código generado por modelos.
 
-## 6. CHECKPOINTS — requisito P0
-Mantener cuatro elementos diferentes:
-**PROJECT_CHECKPOINT**: propósito, razón, decisiones y porqués, alternativas descartadas, arquitectura, dependencias, objetivos, trabajos delegados, errores, soluciones, recibos, revisiones, pruebas, bloqueos, hitos y NEXT_ACTION.
-**CONVERSATION_CHECKPOINT**: solo fragmentos realmente accesibles de esta conversación con rol, secuencia, origen, conversationId nativo o alias LOCAL, SHA y provenance LITERAL / CITA / RESUMEN / RECONSTRUCCION / UNKNOWN_GAP. Sin API o export real, prohibido prometer transcript FULL.
-**EXECUTOR_CHECKPOINT**: ID de ejecutor, job/operation, journal, lease, fencing, secuencia, intentos, eventos confirmados, recibos, STOP y posible UNKNOWN. Un snapshot no es monitor vivo.
-**RESTORE_POINT**: bytes restaurables reales, manifiesto SHA-256, ubicación fuera del dominio de fallo, procedimiento de recuperación y prueba realizada con readback. Sin ensayo no hay restore acreditado.
+## 6. CONTINUIDAD Y CIERRE PROPORCIONAL — requisito P0
+**Aplicar por defecto el protocolo R2**: `docs/CHECKPOINTS.md` en GitHub y `00-CHECKPOINTS/PROTOCOLO-CIERRE-LIGERO-R2.md` en Drive privado. Distinguir C0 (sin guardado), C1 (un cierre ligero), C2 (checkpoint selectivo) y C3 (operación protegida con recuperación/CAS). **No generar tres checkpoints ni releer toda la evidencia para cada cambio ordinario.**
 
-Reglas: guardar segmentos materiales incrementales; consolidar checkpoint al terminar fase, decisión, prueba, error/corrección, handoff, cierre, pausa, truncamiento o acto protegido. No dispararlo por heartbeat ni hacer múltiples copias del mismo texto. Instantáneas inmutables encadenadas SHA-256; publicar punteros COMMITTED solo tras guardado completo, CAS/lease, readback y verificación del estado anterior. Ante conflicto: conservar ramas, analizar causa y reconciliar, nunca sobreescribir a ciegas. Conservar LKG y referencias a históricos originales.
-Contrato complementario: `00-CHECKPOINTS/PROTOCOLO-CHECKPOINTS-R1.md` y `00-CHECKPOINTS/CRITERIOS-ACEPTACION-R1.md`.
+Mantener tipos distintos cuando correspondan: PROJECT_CHECKPOINT (decisiones, pruebas, bloqueos, NEXT_ACTION), CONVERSATION_CHECKPOINT (solo fragmentos realmente accesibles y procedencia; nunca transcript FULL supuesto), EXECUTOR_CHECKPOINT (journal/lease/operación originales, no monitor vivo) y RESTORE_POINT (bytes reales fuera del mismo dominio de fallo y prueba de restauración). Un cierre C1 puede **referenciarlos** sin regenerarlos.
+
+Al finalizar un cambio material: anotar una sola vez qué cambió, por qué, resultado, pruebas relevantes, evidencias referenciadas, estado de sincronización y NEXT_ACTION. Con acceso autorizado, **guardar en Drive como parte del cierre** y hacer una lectura remota dirigida del registro/recibo. La carpeta local sincronizada no demuestra por sí sola que Drive recibió los bytes; sin readback marcar PENDING_SYNC y no presentar el cierre documental como completado. No repetir SUCCEEDED; reconciliar UNKNOWN. Conservar LKG y no modificar un puntero COMMITTED sin CAS/lease real.
+
+El R1 anterior `00-CHECKPOINTS/PROTOCOLO-CHECKPOINTS-R1.md` queda como antecedente de los controles reforzados; sus disparadores uniformes quedan sustituidos por R2. Ninguna simplificación autoriza acciones protegidas, borrar históricos o afirmar E2E.
 
 ## 7. Reanudación efectiva y estados inciertos
-Orden obligatorio:
-1. Leer último `LEEME-PRIMERO.md`, catálogo y manifest.
-2. Leer PROJECT_CHECKPOINT del proyecto elegido y checkpoint de ESTA conversación (no el de otra).
-3. Examinar fuentes de decisiones, pruebas, fallos, alternativas y orígenes literales.
-4. Consultar journal/lease y estado VIVO de cada ejecutor original, cuando haya acceso.
-5. Reconciliar contradicciones, versiones, UNKNOWN y operaciones sin recibo.
-6. Determinar qué ya se hizo, qué NO repetir y NEXT_ACTION.
-No reejecutar SUCCEEDED. Timeout o UNKNOWN → inspeccionar original journal/readback ANTES de intentar otra vez. Ante desconexión, mostrar límites y continuar solo trabajos seguros que no dependan de estados desconocidos.
-El historial completo que no esté realmente accesible se referencia con UNKNOWN_GAP, nunca se inventa.
+**Lectura progresiva, no barridos automáticos.** Identificar projectId, consultar cápsula y último checkpoint pertinente, y recuperar solo decisiones y evidencias necesarias. Reusar en la misma conversación material ya verificado; un índice no es estado vivo.
+Si habrá ejecución, consultar journal, lease, recibos y estado VIVO del ejecutor original según el efecto; confrontar contradicciones y UNKNOWN antes de actuar. Para consulta documental sin efectos no hace falta sondear al ejecutor. No reejecutar SUCCEEDED. Timeout o UNKNOWN → inspeccionar original journal/readback ANTES de intentar otra vez.
+Ante desconexión: conservar cierre local y marcar PENDING_SYNC/VERIFICACION_PARCIAL, jamás inventar una subida a Drive. El historial completo no accesible es UNKNOWN_GAP.
 
 ## 8. LISTA — propuestas y memoria de futuro
 `07-LISTA/INDEX.json` más fichas. Guardar ideas, mejoras, requisitos y asuntos futuros con ID inmutable, projectId, título, fecha, prioridad, fuente, motivo, riesgos, dependencias, estados y criterios de aceptación. No es cola de efectos. Comandos previstos: LISTA, LISTA <id>, GUARDAR, AMPLIAR, BUSCAR. No fusionar duplicados automáticamente; primero enseñar candidatos y preservar procedencia. Diferenciar PROPUESTO/CONSTRUIDO/PROBADO/INSTALADO. Las fichas históricas no atribuyen autorización ni estados vigentes.
@@ -87,12 +80,13 @@ El legado se conserva de forma aislada en `09-HISTORICO`, incluida su LISTA anti
 En el Drive canónico existen referencias privadas a proyectos reales, pero la sincronización de Drive NO es journal transaccional ni mutex; para multiagente se necesita control CAS separado, conflictos y reconciliación offline/online.
 
 ## 11. GUARDAR, cambios y continuidad editorial
-GUARDAR: conservar tema, decisiones y fuentes a nivel de proyecto o LISTA, mostrando cobertura real y deduplicación por SHA/ID. GUARDAR CONVERSACION: capturar solo los segmentos accesibles, etiquetas de procedencia y gaps; no inventar mensajes omitidos. Guardar checkpoints de chat y proyecto por separado. 
-Cambiar normas: elevar revisión, proponer diff, conservar preimagen, calcular hash SHA-256, actualizar copia pública y Drive con readback, regenerar manifiesto y bootstrap, validar con prueba de carga. La versión previa se considera LKG hasta verificar la nueva. No prometer que otras IA cargaron el cambio hasta probar su acceso.
+GUARDAR: conservar decisiones y fuentes a nivel de proyecto o LISTA solo cuando lo pida el usuario o exista cambio material. GUARDAR CONVERSACION: archivar exclusivamente segmentos accesibles, etiquetando cobertura. **CIERRE C1 por defecto:** un registro breve, solo evidencias nuevas o modificadas, deduplicación por IDs/SHA, lectura única de confirmación desde Drive y NEXT_ACTION. No efectuar múltiples operaciones documentales por cada microprueba ni crear checkpoints redundantes. Si no hay acceso a Drive, conservar PENDING_SYNC, no fingir éxito.
+
+Modificar normas TCSA (este caso): conservar versión previa, aumentar versión, calcular SHA-256 de bytes UTF-8, publicar GitHub y Drive, actualizar manifiesto/bootstrap y verificar cada fuente una vez. La versión previa sigue siendo LKG hasta completar las lecturas. Cambiar documentos no cambia por sí solo ajustes de ChatGPT ni Claude.
 
 ## 12. Cierre y evidencia
-Reportar M1 CONSTRUCCION, M2 INTEGRACION, M3 PRUEBAS, M4 AUTORIZACION, M5 INSTALACION, M6 VERIFICACION con alcance exacto, evidencia original, hashes, operaciones/IDs, errores, bloqueos y NEXT_ACTION. Mostrar qué está implementado, qué es propuesta, qué fue probado y qué falta.
-Saturación interna de ChatGPT: DESCONOCIDA sin medida. Nunca declarar ACTIVE un candidato ni inventar métricas, ejecución en segundo plano, restauración total o readback ajeno.
+**C0:** sin cierre documental. **C1:** comunicar cambio, prueba o recibo pertinente, estado de Drive y NEXT_ACTION en pocas líneas. **C2/C3:** incluir M1–M6 aplicables y riesgos según alcance, con referencias a la evidencia original; no exigir repetir todos los campos cuando sean N/A. Estados PENDING/RUNNING/PASS/FAILED/BLOCKED/NOT_APPLICABLE; N/A no cuenta como PASS. Reportar fallos o sincronización pendiente sin alargar el informe con una lista de hashes ya archivada.
+Saturación interna de ChatGPT: DESCONOCIDA sin medida. No afirmar ACTIVE, E2E, restauración total ni readback ajeno por mera documentación.
 
 ## 13. Estado conocido en la migración inicial (no es estado vivo)
 Se archivó continuidad y parte de fuentes de AF-CORE en Google Drive privado, se indexó el histórico en un espacio aislado y se publicaron herramientas y normas saneadas en GitHub. Existen pruebas acotadas de restauración y hashes, pero no está probado el arranque automático entre plataformas, lectura de transcripciones íntegras, CAS multiplataforma o reconciliación del ejecutor original en tiempo real.
