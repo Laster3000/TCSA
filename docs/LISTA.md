@@ -1,3 +1,3 @@
-# LISTA - memoria de propuestas y proyectos futuros
+# LISTA ACTUAL DE TCSA
 
-Fichas numeradas con prioridad, origen, alcance, categoria, evidencias y proximas acciones. LISTA no es una cola ejecutable. El indice separa PROPUESTO/CONSTRUIDO/PROBADO/INSTALADO; solo evidencias sustentan estados. Funciones futuras: GUARDAR, BUSCAR, AMPLIAR; nunca fusion automatica sin resolver conflicto. Referencias a checkpoints, decisiones y descubrimientos. Los antecedentes externos se mantienen unicamente en el archivo historico separado.
+Solo fichas actuales de AUTOFABRICADOR/TCSA y proyectos nuevos. `07-LISTA/INDEX.json` contiene IDs propios. La **LISTA ANTIGUA** pertenece exclusivamente a un archivo histórico aparte, no participa en el índice, búsqueda ordinaria, prioridades ni tareas de AUTOFABRICADOR. Consultar el archivo antiguo solo por solicitud expresa; conservar procedencia y estado histórico.
