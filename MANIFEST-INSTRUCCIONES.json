@@ -1,10 +1,10 @@
 {
   "schema": "tcsa.master-manifest.v1",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "date": "2026-11-09",
   "document": "INSTRUCCIONES-MAESTRAS.md",
-  "sha256": "465f67334f121449a557ae6c10084f8f1ade1aa5b780b2f7957548fd96ce2594",
-  "bytesUtf8": 18409,
+  "sha256": "8e475f11b01ba2c3bbd6e5fbe0fdaf7dcbb2f996cb5991809140079d1743a591",
+  "bytesUtf8": 18820,
   "githubPublicUrl": "https://github.com/Laster3000/TCSA/blob/main/INSTRUCCIONES-MAESTRAS.md",
   "githubCommitInitial": "fa379fac5eb66f375e9f2b6424e5ad1027f5caee",
   "driveRootFolderId": "1JOtra7bbQagW6efcrWtoUUsEahTm98gT",
@@ -12,11 +12,14 @@
   "authority": "DOCUMENTARY_PROTOCOL",
   "requiresAuthenticatedReadForPrivateData": true,
   "githubVisibility": "PUBLIC",
-  "status": "MASTER_PUBLISHED; AI_PLATFORM_BOOTSTRAP_PENDING_USER_CONFIGURATION",
+  "status": "MASTER_V1_2_PUBLISHED; BOOTSTRAP_CONFIGURATION_REQUIRES_USER_ACTION",
   "lkgPolicy": "Retain previous verified edition; update version, master SHA and bootstraps together.",
-  "githubCommitCurrent": "0e39397a96444cf27fb2739a05c8801250f30115",
-  "previousMasterSha256": "82db4a2c8c867c4f6fb1a4e4c37c743ce30e2d5b7977f0667a4f20fff96cfa02",
-  "priority": "P0_WEB_AI_ECONOMY_AND_STRICT_LEGACY_SEPARATION",
+  "previousMasterSha256": "465f67334f121449a557ae6c10084f8f1ade1aa5b780b2f7957548fd96ce2594",
+  "priority": "P0_PROPORTIONAL_CLOSURE_AND_WEB_AI_ECONOMY",
   "migrationCoverage": "PARTIAL_USEFUL_CONTENT_NOT_FULLY_RECONCILED",
-  "updatedDate": "2026-11-09"
+  "updatedDate": "2026-11-09",
+  "githubCommitPrevious": "0e39397a96444cf27fb2739a05c8801250f30115",
+  "closureProtocol": "docs/CHECKPOINTS.md",
+  "closureProtocolVersion": "2.0",
+  "closureAutomation": "tools/cierre_ligero.py (local C1 only; remote API readback separate)"
 }
