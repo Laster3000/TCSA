@@ -3,13 +3,13 @@
 ## Qué se ha instalado
 - Documento maestro público idéntico al de Google Drive: [INSTRUCCIONES-MAESTRAS.md](../INSTRUCCIONES-MAESTRAS.md).
 - Manifiesto [MANIFEST-INSTRUCCIONES.json](../MANIFEST-INSTRUCCIONES.json) que fija versión y SHA-256.
-- Arranque corto: [BOOTSTRAP-CHATGPT-CLAUDE-R2.txt](BOOTSTRAP-CHATGPT-CLAUDE-R2.txt).
+- Arranque corto: [BOOTSTRAP-CHATGPT-CLAUDE-R3.txt](BOOTSTRAP-CHATGPT-CLAUDE-R3.txt).
 - `CLAUDE.md` para Claude Code dentro de este repositorio.
 - `AGENTS.md` para agentes de desarrollo compatibles.
 - `tools/verify_master.py` para validar el SHA-256 en una copia local.
 
 ## ChatGPT Projects
-1. Abrir la configuración de instrucciones del proyecto y sustituir el texto anterior por el contenido de `BOOTSTRAP-CHATGPT-CLAUDE-R2.txt` (Drive: `01-INSTRUCCIONES/COPIAR-INSTRUCCIONES.txt`).
+1. Abrir la configuración de instrucciones del proyecto y sustituir el texto anterior por el contenido de `BOOTSTRAP-CHATGPT-CLAUDE-R3.txt` (Drive: `01-INSTRUCCIONES/COPIAR-INSTRUCCIONES.txt`).
 2. Habilitar acceso a GitHub y, para datos privados, a Google Drive cuando las integraciones estén disponibles; alternativamente adjuntar el maestro y los archivos de continuidad autorizados al proyecto.
 3. Empezar una conversación nueva y pedir: «Valida el maestro TCSA: indica versión, SHA y si has podido leer el catálogo privado».
 4. No asumir que cada turno realiza una descarga nueva sin herramienta de acceso o que las rutas en el prompt son un enlace montado.
@@ -33,3 +33,6 @@ Debe devolver PASS sobre el repositorio cuando contenga el manifiesto y el maest
 - El repositorio GitHub es público. Los checkpoints completos y datos privados permanecen en Google Drive autorizado; la conexión a Drive no deriva del enlace público.
 - La reanudación verdadera de un trabajo exige comprobar el journal, los recibos y el lease del ejecutor original; no basta con leer el maestro o un catálogo.
 - El histórico permanece separado y solo aporta conocimiento consultable.
+
+## Actualización R3
+La versión maestra es 1.1.0; incluye la premisa P0 de mínima carga de IA web y la separación estricta de LISTA antigua. Reemplazar cualquier bootstrap R2 por R3 en los ajustes del proyecto.
