@@ -1,33 +1,34 @@
-# TCSA - Protocolo de checkpoints R1 (CANDIDATO, NO IMPLEMENTADO)
-Fecha: 2026-11-09. Alcance: AUTOFABRICADOR y proyectos separados. No importa autoridad, procesos ni historicos sistema anterior.
+# TCSA — PROTOCOLO DE CIERRE LIGERO R2
+Versión: 2.0 | Fecha: 2026-11-09 | Estado: NORMA VIGENTE DE PROPORCIONALIDAD. La automatización multiplataforma y el CAS distribuido NO están certificados.
 
-## Principio
-El checkpoint es una fotografia estructurada, firmemente vinculada a la evidencia del estado recuperable. No es una transcripcion completa ni un RESTORE_POINT ni la fuente del estado vivo por si solo. El journal original y los recibos prevalecen sobre una instantanea obsoleta. Un checkpoint sin readback y referencias a fuentes verificables es provisional.
+## Objetivo
+Completar el trabajo y conservar continuidad útil con el menor esfuerzo total. **Un solo cierre por cambio material**, en lugar de rehacer inventarios, descargar todos los recibos o producir tres checkpoints completos por costumbre. Esta norma sustituye los disparadores y los requisitos uniformes de cierre de R1; R1 queda como referencia histórica y para procedimientos de alto riesgo compatibles. No se debilitan las reglas de seguridad, privacidad, journal original, estados UNKNOWN ni autorización protegida.
 
-## Clases separadas
-A) PROJECT_CHECKPOINT: por projectId. Objetivo y por que, decisiones y motivos, alternativas descartadas, arquitectura, requisitos, dependencias, rutas, repos, revision/LKG y candidato, estado M1-M6, trabajo hecho, pruebas, bloqueos, errores, soluciones probadas, NEXT_ACTION y referencias a operaciones y evidencias originales.
-B) CONVERSATION_CHECKPOINT: por conversationId nativo, o alias LOCAL explicitamente declarado. Solo mensajes/resultados literalmente accesibles, su procedencia y segmentos SHA; distinguir LITERAL, CITA, RESUMEN, RECONSTRUCCION, UNKNOWN_GAP. Nunca mezclar conversaciones ni prometer FULL sin API.
-C) EXECUTOR_CHECKPOINT: por executorId/jobId/operationId, estado de ejecucion, journal offsets, lease y fencing token, intentos, ultimo evento confirmado, recibos y artefactos. No sustituye una lectura EN VIVO del ejecutor original.
-D) RECOVERY_POINT: copia real de bytes, manifiesto SHA-256 y procedimiento de restauracion, preservada en almacenamiento de rescate fuera del dominio de fallo, con ensayo de restore y recibo propio. No confundir con los tres checkpoints de estado.
-E) GLOBAL_CATALOG_POINTER: indice ligero con ultimo checkpoint COMMITTED por proyecto/conversacion/ejecutor, revisiones y referencias; nunca contiene un resumen unico que reemplace los anteriores.
+## Niveles de cierre (elegir el mínimo suficiente)
+- **C0 — Consulta:** saludo, búsqueda, explicación, lectura sin cambios, pruebas repetidas sin novedad. **Sin escritura, sin checkpoint nuevo, sin descarga masiva de Drive.** Si el usuario pide GUARDAR, aplicar C1.
+- **C1 — Cambio material rutinario (predeterminado):** edición pequeña, nueva decisión, documentación, prueba útil, avance acotado. Escribir **un registro breve** (projectId, revision/operationId, qué/por qué, resultado real, pruebas pertinentes, rutas/IDs de evidencias, bloqueos y NEXT_ACTION), adjuntar **solo archivos cambiados** cuando haya que preservarlos, SHA de esos archivos y un readback local. Sin checkpoint de conversación/ejecutor ni copia integral de journal si no cambiaron. Sin regenerar un manifiesto global ni recorrer todo el catálogo. Sin declarar COMMITTED por el mero hecho de copiar a Drive.
+- **C2 — Cambio importante:** arquitectura, release candidato, integración de varias piezas, prueba E2E nueva o fallo relevante. C1 + preimagen recuperable de los archivos afectados, pruebas independientes relevantes, checkpoint de proyecto y manifiesto selectivo. Checkpoint de ejecutor solo si hubo ejecución/estado nuevo; conversación solo si hubo contenido realmente material que no está ya preservado. Verificar al menos el recibo relevante en Drive con API/conector; no descargar todo el archivo.
+- **C3 — Operación protegida/crítica:** migración, instalación/servicio/arranque, borrado significativo, credenciales, permisos, datos irreemplazables, retirada de origen o promoción COMMITTED compartida. Mantener planSha, autorización, journal/lease, fencing/CAS donde aplique, preimagen, copia en dominio de fallo independiente, readback y restore ensayado según riesgo. Si no hay CAS seguro, conservar candidato y declarar promoción bloqueada; **nunca simular COMMITTED**.
 
-## Campos minimos comunes
-schemaVersion, checkpointId, type, projectId, conversationId si aplica, executorId/jobId si aplica, objectiveId, functionalId si aplica, releaseId, operationId, revisionId, createdAtUtc, sourceRefs, sourceHashesSha256, previousCheckpointId, previousCheckpointSha256, payloadSha256, lineage, snapshotStatus (PREPARING|COMMITTED|SUPERSEDED|INVALID), verifiedAtUtc, writerId, evidenceRefs, unknownGaps, nextAction.
+## Flujo determinista y rápido para C1
+1. Confirmar ID de proyecto/operación y última evidencia pertinente. No releer maestro, índice o histórico ya cargados en la conversación sin indicio de cambio. Si hay efecto de ejecución, reconciliar journal/lease original antes de actuar.
+2. Comprobar únicamente el cambio y las pruebas necesarias. Referenciar recibos SUCCEEDED existentes; **no reejecutarlos**. Para UNKNOWN, leer recibo/journal original antes de nuevos efectos.
+3. Crear una sola nota de cierre y copiar únicamente evidencias nuevas o modificadas. Usar ruta o hash de evidencias antiguas sin duplicar sus bytes. Nunca copiar secretos al GitHub público.
+4. Guardar en TCSA Drive privado cuando haya acceso, comprobar una vez el registro/subida **mediante lectura remota real** o metadatos verificables. El montaje sincronizado local por sí solo deja **PENDING_CLOUD_READBACK**. Un único readback suficiente para C1; no volver a descargar todos los archivos ni todas las conversaciones.
+5. Registrar estado `SYNC_VERIFIED` cuando exista prueba remota; si falla, `PENDING_SYNC` / `VERIFICACION_PARCIAL`, conservar copia local e ID para reanudar sin duplicar. Mostrar cierre breve con NEXT_ACTION. C1 documental no requiere actualizar puntero COMMITTED.
 
-## Protocolo de guardado (a implementar y probar)
-1. Capturar segmentos materiales al producirse, con rol, secuencia, origen y SHA, sin inventar contenido no accesible.
-2. Leer ultimo COMMITTED; confirmar CAS por version/etag o puntero de generacion esperado y lease valido. Sin CAS no reemplazar el puntero.
-3. Escribir nueva instantanea INMUTABLE, manifest + hashes; generar bytes completos antes de cambiar referencias.
-4. Releer bytes, recomputar SHA-256 y comprobar schema, enlaces, chain y existencia de referencias.
-5. Promocionar el nuevo puntero COMMITTED mediante CAS; si hay conflicto, preservar ambas ramas, reconciliar desde evidencias y reintentar con nueva generacion.
-6. Replicar a Drive cuando sincronizacion confirmada; Drive no ofrece mutex ni journal transaccional fiable. La ejecucion viva y colas mantienen journal local durable y recuperable.
-7. Conservar ultimo LKG, antecedentes y copia de rescate. No podar historico automaticamente.
+## Reglas invariantes
+- Un checkpoint es documento, no estado LIVE ni RESTORE_POINT. Journal y lease originales prevalecen cuando importan.
+- No repetir SUCCEEDED; UNKNOWN exige reconciliación. La IA autora no valida sola su propio producto.
+- Conservación del LKG y las identidades separadas. Los registros parciales no son transcript FULL.
+- **CAS/lease y prueba de restauración se reservan a promociones compartidas, concurrentes y operaciones que lo requieran**, no a todo cambio rutinario.
+- Sin escritura real y lectura verificable, nunca afirmar que Drive quedó sincronizado. Sin prueba, no declarar PASS.
+- M1–M6: informar **solo hitos aplicables al alcance**; N/A no equivale a PASS. Cada cierre debe indicar BLOCKED y NEXT_ACTION si corresponden.
+- GitHub TCSA es público y privado Drive es privado. Cambios de normas requieren versión, SHA-256, manifiesto, bootstrap y lectura de ambas fuentes; conservan preimagen y edición anterior.
 
-## Cuando capturar
-Al finalizar un cambio material; decision de arquitectura; trabajo delegado y recibo original; prueba/fracaso y correccion; cambio de fase; STOP, pausa o handoff; cierre; antes/despues de efectos protegidos; riesgo de truncamiento. No usar heartbeats o polling como razon documental por defecto.
+## Automatización y medición
+Usar, cuando esté disponible, herramienta determinista `tools/cierre_ligero.py` para generar **un único C1** idempotente y verificar los SHA locales; si copia a la unidad Drive sincronizada, el resultado sigue siendo `PENDING_CLOUD_READBACK` hasta que el conector confirme existencia. No afirmar que los agentes lo hacen automáticamente ni que un watcher está instalado; sin ejecución programada, el operador debe invocarlo en el cierre.
+Medir de forma opcional tiempo total y número de llamadas de cierre. Si C1 consume más trabajo documental que la tarea, revisar proceso, no añadir verificación por inercia.
 
-## Reanudacion obligatoria
-Leer LEEME-PRIMERO -> catalogo -> ultimo PROJECT_CHECKPOINT COMMITTED -> CONVERSATION_CHECKPOINT correcto -> manifest/decision/evidencias -> journal/lease/estado VIVO del ejecutor original -> confrontar contradicciones y UNKNOWN -> NEXT_ACTION. NO repetir SUCCEEDED. Para UNKNOWN, buscar original journal/recibo/readback antes de cualquier replay.
-
-## Normas de seguridad
-Checkpoints privados por defecto, cifrado en reposo cuando disponible, sin claves/secretos, rutas con acceso minimo y export publico saneado. No importar ni atribuir autoridad del TCSA de sistema anterior. Todo dato historico conserva origen y etiquetas de confianza.
+## Reanudación proporcional
+Para responder/consultar: leer solo la cápsula y el último resumen fiable. Para ejecutar: leer checkpoint pertinente y journal/lease original, reconciliar UNKNOWN. Para restaurar/proteger: ampliar a originales, hashes, manifiestos y restore de C3. Nunca barrer todo el TCSA por defecto.
