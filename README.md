@@ -1,6 +1,6 @@
 # TCSA — continuidad y conocimiento multiproyecto
 
-TCSA es un sistema independiente para registrar proyectos, conversaciones, ejecuciones, checkpoints, decisiones, LISTA y DESCUBRIMIENTOS. La continuidad privada reside en TCSA3000 (programa MCP portátil, https://github.com/Laster3000/tcsa3000) y Google Drive es su espejo de respaldo; este repositorio publico contiene solo contratos y herramientas publicables.
+TCSA es un sistema independiente para registrar proyectos, conversaciones, ejecuciones, checkpoints, decisiones, LISTA y DESCUBRIMIENTOS. La continuidad privada reside en TCSA3000 (programa MCP portátil, https://github.com/Laster3000/tcsa3000) con respaldos en un repositorio GitHub privado (2.º) y Google Drive (3.º); este repositorio publico contiene solo contratos y herramientas publicables.
 
 **Estado:** bootstrap y migracion en curso. No se certifica aun reanudacion E2E ni automatizacion universal. No publicar checkpoints privados, credenciales ni transcripciones.
 
@@ -10,7 +10,7 @@ La fuente de verdad de un estado vivo siempre se reconcilia con journal, lease y
 
 **Punto de entrada universal:** [INSTRUCCIONES-MAESTRAS.md](INSTRUCCIONES-MAESTRAS.md), con SHA-256 fijado en [MANIFEST-INSTRUCCIONES.json](MANIFEST-INSTRUCCIONES.json).
 
-- ChatGPT Projects y Claude.ai Projects: copiar [el bootstrap breve](docs/BOOTSTRAP-CHATGPT-CLAUDE-R6.txt) a sus instrucciones y dar acceso al maestro por GitHub/Drive o adjuntarlo como conocimiento.
+- ChatGPT Projects y Claude.ai Projects: copiar [el bootstrap breve](docs/BOOTSTRAP-TCSA3000-v7.txt) a sus instrucciones y dar acceso al maestro por GitHub/Drive o adjuntarlo como conocimiento.
 - Claude Code en este repositorio: [CLAUDE.md](CLAUDE.md) carga como referencia el maestro y su manifiesto.
 - Otros agentes compatibles: [AGENTS.md](AGENTS.md).
 - [Guía de activación](docs/COMO-ACTIVAR-CHATGPT-CLAUDE.md) y [validador local](tools/verify_master.py).

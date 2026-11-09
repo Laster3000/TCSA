@@ -1,5 +1,5 @@
 # TCSA — INSTRUCCIONES MAESTRAS CANÓNICAS
-Versión: 1.3.0 | Fecha: 2026-11-09 | Estado: NORMA DOCUMENTAL VIGENTE PARA CONFIGURACIÓN, NO CERTIFICACIÓN E2E
+Versión: 1.4.0 | Fecha: 2026-11-09 | Estado: NORMA DOCUMENTAL VIGENTE PARA CONFIGURACIÓN, NO CERTIFICACIÓN E2E
 Ámbito: ChatGPT, Claude, herramientas de desarrollo y agentes autorizados que puedan leer este documento.
 
 ## 0. Qué es TCSA
@@ -14,7 +14,8 @@ La IA web experta (ChatGPT/Claude) debe aportar principalmente juicio, arquitect
 **Repositorio público de normas y herramientas:** https://github.com/Laster3000/TCSA
 **Maestro público versionado:** https://github.com/Laster3000/TCSA/blob/main/INSTRUCCIONES-MAESTRAS.md
 **Continuidad canónica (desde v1.3.0): TCSA3000.** La continuidad privada vive en la carpeta `TCSA` del programa portátil TCSA3000 (referencia en el PC autorizado: `D:\TCSA3000\TCSA`), con el maestro en `D:\TCSA3000\TCSA\INSTRUCCIONES-MAESTRAS.md`. Se opera mediante su servidor MCP `tcsa3000` (herramientas `tcsa3000_*`), que aplica estas normas con escritura controlada (creación exclusiva, CAS con preimagen, un agente por proyecto). Programa público: https://github.com/Laster3000/tcsa3000.
-**Respaldo en Google Drive (espejo):** carpeta TCSA (ID 1JOtra7bbQagW6efcrWtoUUsEahTm98gT; ruta sincronizada `G:\Mi unidad\TCSA`). TCSA3000 la mantiene como ESPEJO automático: nunca se borra nada en ella, importa los ficheros nuevos que otra IA cree allí y conserva ambas versiones si algo cambió en los dos lados. Drive ya no es la fuente principal; sirve de respaldo y de acceso para IAs sin MCP.
+**Segundo respaldo: repositorio GitHub PRIVADO de la continuidad.** TCSA3000 lo actualiza automáticamente (un commit por ciclo, sin borrar; bloquea si el repositorio fuera público) y trae lo que una IA cree allí. Es la fuente para IAs sin MCP que tengan conector de GitHub. Este repositorio público (TCSA) contiene solo normas y herramientas, nunca la continuidad.
+**Tercer respaldo: Google Drive (espejo):** carpeta TCSA (ID 1JOtra7bbQagW6efcrWtoUUsEahTm98gT; ruta sincronizada `G:\Mi unidad\TCSA`). TCSA3000 la mantiene como ESPEJO automático: nunca se borra nada en ella, importa los ficheros nuevos que otra IA cree allí y conserva ambas versiones si algo cambió en los dos lados. Drive ya no es la fuente principal; sirve de respaldo y de acceso para IAs sin MCP.
 **Estructura de la continuidad** (igual en la carpeta canónica y en el espejo): 00-CHECKPOINTS, 02-CATALOGO, 03-PROYECTOS, 04-CONVERSACIONES, 05-EVIDENCIAS, 07-LISTA, 08-DESCUBRIMIENTOS, 09-HISTORICO y 99-RECUPERACION.
 **Estado vivo:** journal/lease/recibos del ejecutor original en su almacenamiento local autorizado; se reconcilia y no se sobrescribe a partir de Drive.
 **Rescate independiente:** copias físicas probadas en almacenamiento distinto del origen, con hash y recibo de restauración.
@@ -26,8 +27,8 @@ La copia pública y la copia Drive del maestro deben ser idénticas o una debe d
 ## 2. Arranque real desde ChatGPT y Claude
 Las instrucciones cortas del proyecto funcionan como **bootstrap**; no intentan incrustar todo el manual. Al empezar una nueva conversación:
 0) **Si existe la herramienta MCP `tcsa3000`** (Claude Desktop/Code, Codex, Cursor, VS Code, Gemini o ChatGPT por túnel): llamar `tcsa3000_arranque`; verifica maestro y manifiesto, LEEME y catálogo. Con un encargo: `tcsa3000_abrir_proyecto` → trabajo → `tcsa3000_cierre` → `tcsa3000_soltar_proyecto`. En ese caso los pasos 1-3 los resuelve la herramienta.
-Si no existe, con una herramienta de lectura:
-1) Consultar `INSTRUCCIONES-MAESTRAS.md` desde el espejo de Drive conectado o desde la URL pública GitHub; preferir Drive autorizado para los datos privados. Sin MCP, escribir SOLO ficheros nuevos en `00-CHECKPOINTS/BY-PROJECT/<ID>/CIERRES/` del espejo (nunca sobrescribir índices); TCSA3000 los importa.
+Si no existe, con una herramienta de lectura (primero el repositorio GitHub privado de respaldo y, si no, el espejo de Drive):
+1) Consultar `INSTRUCCIONES-MAESTRAS.md` desde el respaldo conectado o desde la URL pública GitHub; preferir Drive autorizado para los datos privados. Sin MCP, escribir SOLO ficheros nuevos en `00-CHECKPOINTS/BY-PROJECT/<ID>/CIERRES/` del espejo (nunca sobrescribir índices); TCSA3000 los importa.
 2) Comprobar el manifiesto `MANIFEST-INSTRUCCIONES.json`: version, SHA-256 del texto y revisión del documento. Si no se puede calcular hash, declarar verificación limitada, no inventarla.
 3) Leer `LEEME-PRIMERO.md` y `02-CATALOGO/PROYECTOS.json` desde Drive cuando haya permiso; no utilizar un índice público como estado vivo.
 4) Si el usuario seleccionó un proyecto, consultar su cápsula y último checkpoint; después leer el journal/lease/recibo del ejecutor original, si corresponde.
@@ -97,7 +98,7 @@ Se archivó continuidad y parte de fuentes de AF-CORE en Google Drive privado, s
 La situación vigente debe verificarse al cargar el proyecto; no usar esta sección como estado LIVE permanente.
 
 ## 14. Recuperación ante imposibilidad de lectura
-Orden de fuentes: TCSA3000 (MCP o carpeta canónica) → espejo de Drive autorizado → repositorio público GitHub. Si GitHub no responde, intentar Drive autorizado; si Drive no está conectado, intentar copia verificada del repositorio público; si ninguna fuente está disponible, usar último maestro comprobado y avisar del riesgo. Si no existe ninguna copia verificada, no afirmar conformidad con estas normas: solicitar conexión o archivo. No extrapolar secretos ni permisos desde datos históricos.
+Orden de fuentes: TCSA3000 (MCP o carpeta canónica) → repositorio GitHub PRIVADO de respaldo → espejo de Drive autorizado → repositorio público GitHub (solo normas). Si GitHub no responde, intentar Drive autorizado; si Drive no está conectado, intentar copia verificada del repositorio público; si ninguna fuente está disponible, usar último maestro comprobado y avisar del riesgo. Si no existe ninguna copia verificada, no afirmar conformidad con estas normas: solicitar conexión o archivo. No extrapolar secretos ni permisos desde datos históricos.
 
 ## 15. Economía de agentes e IA web — regulación P0
 Aplicar siempre el contrato `10-EFICIENCIA-IA/POLITICA-P0.md`. Enlazarlo con el catálogo de decisiones, DESCUBRIMIENTOS y checkpoints; la reutilización de una solución experta exige validar su entorno y su vigencia.
@@ -116,4 +117,5 @@ Antes de copiar, clasificar por contenido y finalidad: (a) irreproducible/utiliz
 La LISTA antigua está aislada y etiquetada `HISTÓRICO NO VIGENTE`; su presencia no crea un proyecto activo ni una propuesta nueva. No borrar material de origen por el hecho de haber creado un índice. La limpieza definitiva requiere criterios de conservación y recuperación comprobada.
 
 ## 17. TCSA3000 - operación de TCSA
+**v1.4.0:** TCSA3000 administra los respaldos (GitHub privado 2.º, Drive 3.º), guarda varias conexiones MCP (túneles seguros de OpenAI, direcciones HTTP, Cloudflare; sin autenticación o con token), anota todos los fallos en su Historial y registra las **instrucciones de proyecto** con nombre claro, versión y fecha (`<PROYECTO> - <Nombre> - v<N> (<AAAA-MM-DD>)`, una sola VIGENTE por proyecto y tipo; las anteriores se conservan como SUSTITUIDAS).
 TCSA3000 es el programa que opera TCSA: servidor MCP local y portátil para cualquier IA, centro de control, bandeja y túnel seguro opcional para IAs remotas (solo lectura por defecto). Aplica estas normas: cierres C0-C3 (C3 nunca automatizado), INTENT/COMMIT sin repetir SUCCEEDED, proyectos nuevos en ámbito propio, LISTA y DESCUBRIMIENTOS (estos solo para lo importante: impacto ALTO/CRÍTICO), LISTA ANTIGUA solo consulta, histórico y este maestro en solo lectura. Sus normas propias (`NORMAS-TCSA3000.md`) están subordinadas a este documento. Sin servicio en marcha, el acceso MCP queda en solo lectura y el espejo de Drive sirve de respaldo.
