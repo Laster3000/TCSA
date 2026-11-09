@@ -1,0 +1,17 @@
+{
+  "schema": "tcsa.master-manifest.v1",
+  "version": "1.0.0",
+  "date": "2026-11-09",
+  "document": "INSTRUCCIONES-MAESTRAS.md",
+  "sha256": "82db4a2c8c867c4f6fb1a4e4c37c743ce30e2d5b7977f0667a4f20fff96cfa02",
+  "bytesUtf8": 14040,
+  "githubPublicUrl": "https://github.com/Laster3000/TCSA/blob/main/INSTRUCCIONES-MAESTRAS.md",
+  "githubCommitInitial": "fa379fac5eb66f375e9f2b6424e5ad1027f5caee",
+  "driveRootFolderId": "1JOtra7bbQagW6efcrWtoUUsEahTm98gT",
+  "driveRelativePath": "INSTRUCCIONES-MAESTRAS.md",
+  "authority": "DOCUMENTARY_PROTOCOL",
+  "requiresAuthenticatedReadForPrivateData": true,
+  "githubVisibility": "PUBLIC",
+  "status": "MASTER_PUBLISHED; AI_PLATFORM_BOOTSTRAP_PENDING_USER_CONFIGURATION",
+  "lkgPolicy": "Retain previous verified edition; update version, master SHA and bootstraps together."
+}
