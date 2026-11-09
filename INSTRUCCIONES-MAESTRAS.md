@@ -1,11 +1,14 @@
 # TCSA — INSTRUCCIONES MAESTRAS CANÓNICAS
-Versión: 1.0.0 | Fecha: 2026-11-09 | Estado: NORMA DOCUMENTAL VIGENTE PARA CONFIGURACIÓN, NO CERTIFICACIÓN E2E
+Versión: 1.1.0 | Fecha: 2026-11-09 | Estado: NORMA DOCUMENTAL VIGENTE PARA CONFIGURACIÓN, NO CERTIFICACIÓN E2E
 Ámbito: ChatGPT, Claude, herramientas de desarrollo y agentes autorizados que puedan leer este documento.
 
 ## 0. Qué es TCSA
 TCSA es el sistema independiente de continuidad, proyectos, decisiones, descubrimientos y recuperación de trabajo de AUTOFABRICADOR y de los proyectos separados que se registren. TCSA no es el motor que genera aplicaciones: AUTOFABRICADOR lo es. Ninguna autoridad, servicio, configuración protegida, credencial ni permiso de un sistema histórico se importa al TCSA operativo.
 
 Principios: una fuente de referencia canónica, evidencia verificable, trazabilidad, privacidad, ausencia de duplicados innecesarios y ejecución honesta. La documentación no prueba la instalación. Un checkpoint no sustituye al estado vivo de un proceso ni a los bytes de un punto de restauración.
+
+## 0.1. REGLA SUPREMA P0 — MÍNIMO TRABAJO DE IA WEB
+La IA web experta (ChatGPT/Claude) debe aportar principalmente juicio, arquitectura, diagnóstico difícil y revisión crítica. No debe consumir razonamiento remoto repitiendo inventarios, modificaciones triviales, compilaciones, pruebas, lecturas masivas o cálculos que los ejecutores deterministas y la IA local ya pueden completar con evidencia. Elegir la ruta que minimice esfuerzo total y coste sin perder calidad comprobable. Consultar las decisiones recuperables antes de pagar de nuevo por un razonamiento ya realizado. La política detallada está en `10-EFICIENCIA-IA/POLITICA-P0.md`. Esta norma no garantiza todavía un enrutador autónomo instalado.
 
 ## 1. Ubicaciones, capas y precedencia
 **Repositorio público de normas y herramientas:** https://github.com/Laster3000/TCSA
@@ -72,13 +75,15 @@ El historial completo que no esté realmente accesible se referencia con UNKNOWN
 ## 8. LISTA — propuestas y memoria de futuro
 `07-LISTA/INDEX.json` más fichas. Guardar ideas, mejoras, requisitos y asuntos futuros con ID inmutable, projectId, título, fecha, prioridad, fuente, motivo, riesgos, dependencias, estados y criterios de aceptación. No es cola de efectos. Comandos previstos: LISTA, LISTA <id>, GUARDAR, AMPLIAR, BUSCAR. No fusionar duplicados automáticamente; primero enseñar candidatos y preservar procedencia. Diferenciar PROPUESTO/CONSTRUIDO/PROBADO/INSTALADO. Las fichas históricas no atribuyen autorización ni estados vigentes.
 
+**LISTA ANTIGUA EXCLUIDA:** la antigua LISTA de MMC está únicamente en `09-HISTORICO/LISTA-ANTIGUA-MMC`, con archivo histórico de solo lectura. No pertenece a `07-LISTA`, no aparece en búsquedas ordinarias ni se migra como fichas actuales. Acceder solo cuando el usuario pida expresamente «LISTA ANTIGUA» o una búsqueda histórica. Sus identificadores, prioridades y permisos no se reutilizan.
+
 ## 9. DESCUBRIMIENTOS — conocimiento utilizable
 `08-DESCUBRIMIENTOS/INDEX.json` más fichas. Archivar decisiones, soluciones probadas, causas raíz, fallos, herramientas, estrategias, referencias y advertencias reutilizables. Campos mínimos: ID, tipo, síntesis, aplicabilidad, proyecto, estado HIPOTESIS/OBSERVADO/PROBADO/INVALIDADO, fecha, evidencia, fuente y SHA cuando se conozca. Antes de repetir un error conocido, consultar descubrimientos aplicables y verificar vigencia. La hipótesis no se convierte en regla ni prueba.
 Toda ficha importante enlaza al checkpoint, operación y documentación original para permitir ampliación bajo demanda.
 
 ## 10. Privacidad, GitHub y archivo histórico
 GitHub TCSA es público: allí solo se publica código, contratos, instrucciones generales, catálogos saneados y ejemplos no sensibles. Checkpoints de conversaciones, datos privados, journal operativo, secretos, paquetes binarios, rutas sensibles de personas y documentos de terceros quedan fuera. Verificar cada exportación.
-El legado se conserva de forma aislada en `09-HISTORICO`, como consulta forense y solo lectura. Las referencias antiguas no deben aparecer como autoridad, objetivo activo ni menú por defecto. No borrar originales ni respaldos por copiar un índice. Un inventario de rutas no es una copia completa del contenido.
+El legado se conserva de forma aislada en `09-HISTORICO`, incluida su LISTA antigua bajo `09-HISTORICO/LISTA-ANTIGUA-MMC`, como consulta forense y solo lectura. Las referencias antiguas no deben aparecer como autoridad, objetivo activo ni menú por defecto. No borrar originales ni respaldos por copiar un índice. Un inventario de rutas no es una copia completa del contenido.
 En el Drive canónico existen referencias privadas a proyectos reales, pero la sincronización de Drive NO es journal transaccional ni mutex; para multiagente se necesita control CAS separado, conflictos y reconciliación offline/online.
 
 ## 11. GUARDAR, cambios y continuidad editorial
@@ -92,6 +97,22 @@ Saturación interna de ChatGPT: DESCONOCIDA sin medida. Nunca declarar ACTIVE un
 ## 13. Estado conocido en la migración inicial (no es estado vivo)
 Se archivó continuidad y parte de fuentes de AF-CORE en Google Drive privado, se indexó el histórico en un espacio aislado y se publicaron herramientas y normas saneadas en GitHub. Existen pruebas acotadas de restauración y hashes, pero no está probado el arranque automático entre plataformas, lectura de transcripciones íntegras, CAS multiplataforma o reconciliación del ejecutor original en tiempo real.
 La situación vigente debe verificarse al cargar el proyecto; no usar esta sección como estado LIVE permanente.
+
+## 15. Economía de agentes e IA web — regulación P0
+Aplicar siempre el contrato `10-EFICIENCIA-IA/POLITICA-P0.md`. Enlazarlo con el catálogo de decisiones, DESCUBRIMIENTOS y checkpoints; la reutilización de una solución experta exige validar su entorno y su vigencia.
+
+**L0 determinista:** búsquedas, inventarios, SHA, CAS, compilación, pruebas, clasificación mecánica, paquetes y readback mediante código repetible.
+**L1 IA local:** trabajo ordinario de implementación, pequeñas decisiones acotadas, generación/edición/corrección de código y ejecución de oráculos independientes donde haya capacidades probadas. La IA local puede proponer, pero no sustituir la prueba del ejecutor real.
+**L2 IA web experta:** problemas nuevos con incertidumbre material, arquitectura, seguridad, decisiones de gran impacto, contradicciones graves y fallos persistentes con evidencia. No consultar expertos en cada microprueba.
+**L3 segundo experto:** solo si hay un conflicto crítico, alto riesgo o petición del usuario, nunca por rutina.
+
+Antes del escalado, crear una cápsula breve, suficientemente completa, con QUÉ/POR QUÉ, situación, decisiones ya tomadas, intentos/errores/soluciones ensayadas, estado vivo, citas SHA a evidencias y una pregunta concreta. Tras recibir la orientación, delegar lo ejecutable de vuelta al nivel local y registrar en DESCUBRIMIENTOS para no volver a gastar web por la misma causa.
+Medir llamadas remotas reales, tokens conocidos, coste facturado si accesible, tiempo, resultados y retrabajo; si no hay datos, coste y ahorro DESCONOCIDOS. Aplicar presupuestos por objetivo y evitar costes remotos no autorizados. No transferir secretos ni datos privados sin permiso y alcance válido. La economía no debe sacrificar seguridad ni aceptación independiente.
+
+## 16. Migración selectiva y prohibición de basura en el TCSA activo
+Antes de copiar, clasificar por contenido y finalidad: (a) irreproducible/utilizable — decisiones, código propio, agentes, contratos, pruebas, recibos, checkpoints y referencias restaurables; (b) reproductible/voluminoso — dependencias, modelos, ZIP generados y apps empaquetadas: mantener ruta, hash si está medido y procedimiento de reconstrucción; (c) cache/temporal/duplicado — no copiar al TCSA activo; (d) UNKNOWN — inspeccionar sin eliminar el origen ni declarar descartable. Deduplicar por SHA antes de guardar. Evitar copiar paquetes enormes a Drive o GitHub solo por completar un inventario.
+**Estado real de migración:** se verificaron 2.354 archivos de continuidad y 1.906 archivos seleccionados de fuentes y operaciones. Existe un inventario de 47.081 rutas de AUTOFABRICADOR; no prueba que todas las fuentes relevantes estén migradas ni que lo no copiado sea basura. El supervisor vivo, sus leases, algunos recibos y materiales irreproducibles deben revisarse antes de declarar COMPLETO.
+La LISTA antigua está aislada y etiquetada `HISTÓRICO NO VIGENTE`; su presencia no crea un proyecto activo ni una propuesta nueva. No borrar material de origen por el hecho de haber creado un índice. La limpieza definitiva requiere criterios de conservación y recuperación comprobada.
 
 ## 14. Recuperación ante imposibilidad de lectura
 Si GitHub no responde, intentar Drive autorizado; si Drive no está conectado, intentar copia verificada del repositorio público; si ninguna fuente está disponible, usar último maestro comprobado y avisar del riesgo. Si no existe ninguna copia verificada, no afirmar conformidad con estas normas: solicitar conexión o archivo. No extrapolar secretos ni permisos desde datos históricos.
