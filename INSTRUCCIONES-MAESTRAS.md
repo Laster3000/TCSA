@@ -98,6 +98,9 @@ Saturación interna de ChatGPT: DESCONOCIDA sin medida. Nunca declarar ACTIVE un
 Se archivó continuidad y parte de fuentes de AF-CORE en Google Drive privado, se indexó el histórico en un espacio aislado y se publicaron herramientas y normas saneadas en GitHub. Existen pruebas acotadas de restauración y hashes, pero no está probado el arranque automático entre plataformas, lectura de transcripciones íntegras, CAS multiplataforma o reconciliación del ejecutor original en tiempo real.
 La situación vigente debe verificarse al cargar el proyecto; no usar esta sección como estado LIVE permanente.
 
+## 14. Recuperación ante imposibilidad de lectura
+Si GitHub no responde, intentar Drive autorizado; si Drive no está conectado, intentar copia verificada del repositorio público; si ninguna fuente está disponible, usar último maestro comprobado y avisar del riesgo. Si no existe ninguna copia verificada, no afirmar conformidad con estas normas: solicitar conexión o archivo. No extrapolar secretos ni permisos desde datos históricos.
+
 ## 15. Economía de agentes e IA web — regulación P0
 Aplicar siempre el contrato `10-EFICIENCIA-IA/POLITICA-P0.md`. Enlazarlo con el catálogo de decisiones, DESCUBRIMIENTOS y checkpoints; la reutilización de una solución experta exige validar su entorno y su vigencia.
 
@@ -113,6 +116,3 @@ Medir llamadas remotas reales, tokens conocidos, coste facturado si accesible, t
 Antes de copiar, clasificar por contenido y finalidad: (a) irreproducible/utilizable — decisiones, código propio, agentes, contratos, pruebas, recibos, checkpoints y referencias restaurables; (b) reproductible/voluminoso — dependencias, modelos, ZIP generados y apps empaquetadas: mantener ruta, hash si está medido y procedimiento de reconstrucción; (c) cache/temporal/duplicado — no copiar al TCSA activo; (d) UNKNOWN — inspeccionar sin eliminar el origen ni declarar descartable. Deduplicar por SHA antes de guardar. Evitar copiar paquetes enormes a Drive o GitHub solo por completar un inventario.
 **Estado real de migración:** se verificaron 2.354 archivos de continuidad y 1.906 archivos seleccionados de fuentes y operaciones. Existe un inventario de 47.081 rutas de AUTOFABRICADOR; no prueba que todas las fuentes relevantes estén migradas ni que lo no copiado sea basura. El supervisor vivo, sus leases, algunos recibos y materiales irreproducibles deben revisarse antes de declarar COMPLETO.
 La LISTA antigua está aislada y etiquetada `HISTÓRICO NO VIGENTE`; su presencia no crea un proyecto activo ni una propuesta nueva. No borrar material de origen por el hecho de haber creado un índice. La limpieza definitiva requiere criterios de conservación y recuperación comprobada.
-
-## 14. Recuperación ante imposibilidad de lectura
-Si GitHub no responde, intentar Drive autorizado; si Drive no está conectado, intentar copia verificada del repositorio público; si ninguna fuente está disponible, usar último maestro comprobado y avisar del riesgo. Si no existe ninguna copia verificada, no afirmar conformidad con estas normas: solicitar conexión o archivo. No extrapolar secretos ni permisos desde datos históricos.
