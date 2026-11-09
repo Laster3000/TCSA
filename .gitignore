@@ -1,0 +1,24 @@
+# TCSA public-only repository: protect local/private data
+*.zip
+*.7z
+*.bak
+*.sqlite
+*.db
+*.log
+*.jsonl
+*.jsonl.gz
+*.pem
+*.pfx
+*.pk8
+*.key
+*.env
+.env*
+__pycache__/
+*.pyc
+.private/
+private/
+continuity-private/
+checkpoints-private/
+legacy-archive/
+data/
+!catalog/
