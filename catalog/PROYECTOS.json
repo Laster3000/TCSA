@@ -1,0 +1,38 @@
+{
+  "schema": "tcsa.catalog.v1",
+  "updatedAtUtc": "2026-11-09T08:48:22.373963+00:00",
+  "projects": [
+    {
+      "projectId": "AF-CORE",
+      "name": "AUTOFABRICADOR",
+      "priority": "P0",
+      "status": "CANDIDATE_NOT_ACTIVE",
+      "latestEvidence": "R92B project checkpoint (not universal active)",
+      "repository": "https://github.com/Laster3000/AUTOFABRICADOR",
+      "capsule": "03-PROYECTOS/AF-CORE/CAPSULA-PROYECTO.json"
+    },
+    {
+      "projectId": "AF-MENU",
+      "name": "MENU-AUTOFABRICADOR",
+      "priority": "P1",
+      "status": "REPOSITORY_EXISTS_E2E_UNKNOWN",
+      "repository": "https://github.com/Laster3000/MENU-AUTOFABRICADOR"
+    },
+    {
+      "projectId": "AF-GAME",
+      "name": "JUEGO-DEL-MENU",
+      "priority": "P1",
+      "status": "REPOSITORY_EXISTS_E2E_UNKNOWN",
+      "repository": "https://github.com/Laster3000/JUEGO-DEL-MENU"
+    },
+    {
+      "projectId": "TCSA-CORE",
+      "name": "TCSA",
+      "priority": "P0-INFRA",
+      "status": "MIGRATING_NOT_FULLY_OPERATIONAL",
+      "repository": "https://github.com/Laster3000/TCSA"
+    }
+  ],
+  "authoritativeForLiveStatus": false,
+  "status": "SNAPSHOT_ONLY_RECHECK_EXECUTOR"
+}
