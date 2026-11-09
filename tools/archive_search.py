@@ -15,7 +15,9 @@ def query_archive(root,term,limit=20,include_content=False):
             if q in x["path"].casefold():
                 found.append({"kind":"HISTORICAL_PATH","path":x["path"],"bytes":x["size"]})
                 if len(found)>=limit:return found
-    lista=hist/"LISTA-ORIGINAL-ARCHIVO.zip"
+    lista=hist/"LISTA-ANTIGUA-MMC"/"LISTA-ORIGINAL-ARCHIVO.zip"
+    if not lista.exists():
+        lista=hist/"LISTA-ORIGINAL-ARCHIVO.zip"  # lectura de archivos anteriores a la segregación
     if lista.exists():
         with zipfile.ZipFile(lista) as z:
             for name in z.namelist():
